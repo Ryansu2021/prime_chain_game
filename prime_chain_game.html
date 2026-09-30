@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="質數接龍遊戲 — 國中數學教學互動工具">
+  <title>質數接龍遊戲 | 國中數學教學工具</title>
+
+  <!-- React 18 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Tailwind CSS（預編譯，僅包含此頁實際使用的 utility classes） -->
+  <style>
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.visible{visibility:visible}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.-left-1{left:-.25rem}.-top-1{top:-.25rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-12{height:3rem}.h-14{height:3.5rem}.h-3{height:.75rem}.h-3\.5{height:.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-7{height:1.75rem}.h-8{height:2rem}.max-h-60{max-height:15rem}.max-h-\[400px\]{max-height:400px}.max-h-\[90vh\]{max-height:90vh}.min-h-\[44px\]{min-height:44px}.min-h-screen{min-height:100vh}.w-12{width:3rem}.w-14{width:3.5rem}.w-3{width:.75rem}.w-3\.5{width:.875rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-7xl{max-width:80rem}.flex-1{flex:1 1 0%}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-move{cursor:move}.select-none{-webkit-user-select:none;-moz-user-select:none;user-select:none}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.overflow-y-auto{overflow-y:auto}.break-all{word-break:break-all}.rounded{border-radius:.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.rounded-t-2xl{border-top-left-radius:1rem;border-top-right-radius:1rem}.border{border-width:1px}.border-2{border-width:2px}.border-dashed{border-style:dashed}.border-blue-200{--tw-border-opacity:1;border-color:rgb(191 219 254/var(--tw-border-opacity,1))}.border-blue-300{--tw-border-opacity:1;border-color:rgb(147 197 253/var(--tw-border-opacity,1))}.border-blue-600{--tw-border-opacity:1;border-color:rgb(37 99 235/var(--tw-border-opacity,1))}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235/var(--tw-border-opacity,1))}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219/var(--tw-border-opacity,1))}.border-green-300{--tw-border-opacity:1;border-color:rgb(134 239 172/var(--tw-border-opacity,1))}.border-green-500{--tw-border-opacity:1;border-color:rgb(34 197 94/var(--tw-border-opacity,1))}.border-orange-200{--tw-border-opacity:1;border-color:rgb(254 215 170/var(--tw-border-opacity,1))}.border-red-200{--tw-border-opacity:1;border-color:rgb(254 202 202/var(--tw-border-opacity,1))}.border-red-400{--tw-border-opacity:1;border-color:rgb(248 113 113/var(--tw-border-opacity,1))}.border-yellow-300{--tw-border-opacity:1;border-color:rgb(253 224 71/var(--tw-border-opacity,1))}.border-yellow-500{--tw-border-opacity:1;border-color:rgb(234 179 8/var(--tw-border-opacity,1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255/var(--tw-bg-opacity,1))}.bg-blue-500{--tw-bg-opacity:1;background-color:rgb(59 130 246/var(--tw-bg-opacity,1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251/var(--tw-bg-opacity,1))}.bg-gray-500{--tw-bg-opacity:1;background-color:rgb(107 114 128/var(--tw-bg-opacity,1))}.bg-green-100{--tw-bg-opacity:1;background-color:rgb(220 252 231/var(--tw-bg-opacity,1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94/var(--tw-bg-opacity,1))}.bg-orange-50{--tw-bg-opacity:1;background-color:rgb(255 247 237/var(--tw-bg-opacity,1))}.bg-orange-500{--tw-bg-opacity:1;background-color:rgb(249 115 22/var(--tw-bg-opacity,1))}.bg-purple-50{--tw-bg-opacity:1;background-color:rgb(250 245 255/var(--tw-bg-opacity,1))}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242/var(--tw-bg-opacity,1))}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68/var(--tw-bg-opacity,1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-white\/20{background-color:hsla(0,0%,100%,.2)}.bg-yellow-100{--tw-bg-opacity:1;background-color:rgb(254 249 195/var(--tw-bg-opacity,1))}.bg-yellow-50{--tw-bg-opacity:1;background-color:rgb(254 252 232/var(--tw-bg-opacity,1))}.bg-yellow-500{--tw-bg-opacity:1;background-color:rgb(234 179 8/var(--tw-bg-opacity,1))}.bg-opacity-50{--tw-bg-opacity:0.5}.bg-gradient-to-br{background-image:linear-gradient(to bottom right,var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.from-blue-50{--tw-gradient-from:#eff6ff var(--tw-gradient-from-position);--tw-gradient-to:rgba(239,246,255,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-blue-500{--tw-gradient-from:#3b82f6 var(--tw-gradient-from-position);--tw-gradient-to:rgba(59,130,246,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-green-50{--tw-gradient-from:#f0fdf4 var(--tw-gradient-from-position);--tw-gradient-to:rgba(240,253,244,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-yellow-50{--tw-gradient-from:#fefce8 var(--tw-gradient-from-position);--tw-gradient-to:hsla(55,92%,95%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.to-blue-50{--tw-gradient-to:#eff6ff var(--tw-gradient-to-position)}.to-orange-50{--tw-gradient-to:#fff7ed var(--tw-gradient-to-position)}.to-purple-50{--tw-gradient-to:#faf5ff var(--tw-gradient-to-position)}.to-purple-500{--tw-gradient-to:#a855f7 var(--tw-gradient-to-position)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-8{padding-top:2rem;padding-bottom:2rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-semibold{font-weight:600}.leading-tight{line-height:1.25}.tracking-wider{letter-spacing:.05em}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235/var(--tw-text-opacity,1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216/var(--tw-text-opacity,1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219/var(--tw-text-opacity,1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175/var(--tw-text-opacity,1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128/var(--tw-text-opacity,1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99/var(--tw-text-opacity,1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81/var(--tw-text-opacity,1))}.text-green-600{--tw-text-opacity:1;color:rgb(22 163 74/var(--tw-text-opacity,1))}.text-green-700{--tw-text-opacity:1;color:rgb(21 128 61/var(--tw-text-opacity,1))}.text-orange-600{--tw-text-opacity:1;color:rgb(234 88 12/var(--tw-text-opacity,1))}.text-purple-600{--tw-text-opacity:1;color:rgb(147 51 234/var(--tw-text-opacity,1))}.text-red-600{--tw-text-opacity:1;color:rgb(220 38 38/var(--tw-text-opacity,1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-yellow-600{--tw-text-opacity:1;color:rgb(202 138 4/var(--tw-text-opacity,1))}.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color)}.shadow,.shadow-2xl{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.hover\:border-gray-400:hover{--tw-border-opacity:1;border-color:rgb(156 163 175/var(--tw-border-opacity,1))}.hover\:bg-blue-100:hover{--tw-bg-opacity:1;background-color:rgb(219 234 254/var(--tw-bg-opacity,1))}.hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgb(37 99 235/var(--tw-bg-opacity,1))}.hover\:bg-gray-600:hover{--tw-bg-opacity:1;background-color:rgb(75 85 99/var(--tw-bg-opacity,1))}.hover\:bg-green-600:hover{--tw-bg-opacity:1;background-color:rgb(22 163 74/var(--tw-bg-opacity,1))}.hover\:bg-orange-100:hover{--tw-bg-opacity:1;background-color:rgb(255 237 213/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(234 88 12/var(--tw-bg-opacity,1))}.hover\:bg-red-100:hover{--tw-bg-opacity:1;background-color:rgb(254 226 226/var(--tw-bg-opacity,1))}.hover\:bg-red-600:hover{--tw-bg-opacity:1;background-color:rgb(220 38 38/var(--tw-bg-opacity,1))}.hover\:bg-white\/30:hover{background-color:hsla(0,0%,100%,.3)}.hover\:bg-yellow-600:hover{--tw-bg-opacity:1;background-color:rgb(202 138 4/var(--tw-bg-opacity,1))}.hover\:from-blue-600:hover{--tw-gradient-from:#2563eb var(--tw-gradient-from-position);--tw-gradient-to:rgba(37,99,235,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.hover\:to-purple-600:hover{--tw-gradient-to:#9333ea var(--tw-gradient-to-position)}.active\:bg-blue-200:active{--tw-bg-opacity:1;background-color:rgb(191 219 254/var(--tw-bg-opacity,1))}.active\:bg-green-700:active{--tw-bg-opacity:1;background-color:rgb(21 128 61/var(--tw-bg-opacity,1))}.active\:bg-orange-200:active{--tw-bg-opacity:1;background-color:rgb(254 215 170/var(--tw-bg-opacity,1))}.active\:bg-red-200:active{--tw-bg-opacity:1;background-color:rgb(254 202 202/var(--tw-bg-opacity,1))}.disabled\:opacity-30:disabled{opacity:.3}@media (min-width:640px){.sm\:-left-2{left:-.5rem}.sm\:-top-2{top:-.5rem}.sm\:col-span-2{grid-column:span 2/span 2}.sm\:mb-2{margin-bottom:.5rem}.sm\:mb-3{margin-bottom:.75rem}.sm\:mb-4{margin-bottom:1rem}.sm\:mb-6{margin-bottom:1.5rem}.sm\:mt-6{margin-top:1.5rem}.sm\:mt-8{margin-top:2rem}.sm\:inline{display:inline}.sm\:h-10{height:2.5rem}.sm\:h-24{height:6rem}.sm\:h-5{height:1.25rem}.sm\:h-6{height:1.5rem}.sm\:h-7{height:1.75rem}.sm\:w-10{width:2.5rem}.sm\:w-24{width:6rem}.sm\:w-5{width:1.25rem}.sm\:w-6{width:1.5rem}.sm\:w-7{width:1.75rem}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:gap-2{gap:.5rem}.sm\:gap-4{gap:1rem}.sm\:gap-6{gap:1.5rem}.sm\:space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.sm\:space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.sm\:space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.sm\:border-4{border-width:4px}.sm\:p-3{padding:.75rem}.sm\:p-4{padding:1rem}.sm\:p-8{padding:2rem}.sm\:px-3{padding-left:.75rem;padding-right:.75rem}.sm\:px-4{padding-left:1rem;padding-right:1rem}.sm\:py-2{padding-top:.5rem;padding-bottom:.5rem}.sm\:py-4{padding-top:1rem;padding-bottom:1rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}.sm\:text-xs{font-size:.75rem;line-height:1rem}}@media (min-width:1280px){.xl\:col-span-1{grid-column:span 1/span 1}.xl\:col-span-2{grid-column:span 2/span 2}.xl\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.xl\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  </style>
+
+  <style>
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Segoe UI", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* 防止觸控時雙擊縮放 */
+    * { touch-action: manipulation; }
+    /* 載入畫面 */
+    #loading {
+      position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(to bottom right, #eff6ff, #faf5ff);
+      font-size: 1.2rem; color: #6b7280;
+      z-index: 9999;
+    }
+    .loading-dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: #3b82f6; margin: 0 3px;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+    .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+    .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div>
+      <div style="text-align:center; margin-bottom:12px;">載入中
+        <span class="loading-dot"></span>
+        <span class="loading-dot"></span>
+        <span class="loading-dot"></span>
+      </div>
+      <div style="font-size:0.9rem; color:#9ca3af;">質數接龍遊戲</div>
+    </div>
+  </div>
+  <div id="root"></div>
+
+  <script>
+const {
+  useState,
+  useEffect,
+  useRef
+} = React;
+
+// ============ Lucide 風格 SVG 圖示元件 ============
+const Icon = ({
+  children,
+  className = ""
+}) => /*#__PURE__*/React.createElement("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: "2",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  className: className,
+  style: {
+    display: 'inline-block',
+    verticalAlign: 'middle'
+  }
+}, children);
+const RotateCcw = ({
+  className
+}) => /*#__PURE__*/React.createElement(Icon, {
+  className: className
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M3 3v5h5"
+}));
+const Trophy = ({
+  className
+}) => /*#__PURE__*/React.createElement(Icon, {
+  className: className
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M6 9H4.5a2.5 2.5 0 0 1 0-5H6"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M18 9h1.5a2.5 2.5 0 0 0 0-5H18"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M4 22h16"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M18 2H6v7a6 6 0 0 0 12 0V2Z"
+}));
+const Lightbulb = ({
+  className
+}) => /*#__PURE__*/React.createElement(Icon, {
+  className: className
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M9 18h6"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M10 22h4"
+}));
+const Move = ({
+  className
+}) => /*#__PURE__*/React.createElement(Icon, {
+  className: className
+}, /*#__PURE__*/React.createElement("polyline", {
+  points: "5 9 2 12 5 15"
+}), /*#__PURE__*/React.createElement("polyline", {
+  points: "9 5 12 2 15 5"
+}), /*#__PURE__*/React.createElement("polyline", {
+  points: "15 19 12 22 9 19"
+}), /*#__PURE__*/React.createElement("polyline", {
+  points: "19 9 22 12 19 15"
+}), /*#__PURE__*/React.createElement("line", {
+  x1: "2",
+  y1: "12",
+  x2: "22",
+  y2: "12"
+}), /*#__PURE__*/React.createElement("line", {
+  x1: "12",
+  y1: "2",
+  x2: "12",
+  y2: "22"
+}));
+const Minus = ({
+  className
+}) => /*#__PURE__*/React.createElement(Icon, {
+  className: className
+}, /*#__PURE__*/React.createElement("line", {
+  x1: "5",
+  y1: "12",
+  x2: "19",
+  y2: "12"
+}));
+const Plus = ({
+  className
+}) => /*#__PURE__*/React.createElement(Icon, {
+  className: className
+}, /*#__PURE__*/React.createElement("line", {
+  x1: "12",
+  y1: "5",
+  x2: "12",
+  y2: "19"
+}), /*#__PURE__*/React.createElement("line", {
+  x1: "5",
+  y1: "12",
+  x2: "19",
+  y2: "12"
+}));
+const ChevronDown = ({
+  className
+}) => /*#__PURE__*/React.createElement(Icon, {
+  className: className
+}, /*#__PURE__*/React.createElement("polyline", {
+  points: "6 9 12 15 18 9"
+}));
+const ChevronUp = ({
+  className
+}) => /*#__PURE__*/React.createElement(Icon, {
+  className: className
+}, /*#__PURE__*/React.createElement("polyline", {
+  points: "18 15 12 9 6 15"
+}));
+
+// ============ 質數接龍遊戲主元件 ============
+const PrimeChainGame = () => {
+  const initialGrid = Array(16).fill(null);
+  // 在編號6的位置（索引5）顯示鼓勵語
+  initialGrid[5] = '很棒，加油';
+  // 在編號10的位置（索引9）顯示鼓勵語
+  initialGrid[9] = '很棒，加油';
+  const [grid, setGrid] = useState(initialGrid);
+  const [currentPath, setCurrentPath] = useState([]);
+  const [selectedCell, setSelectedCell] = useState(null);
+  const [bestScore, setBestScore] = useState(0);
+  const [showHint, setShowHint] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successRecords, setSuccessRecords] = useState([]);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [showRules, setShowRules] = useState(false);
+  const [showEndGame, setShowEndGame] = useState(false);
+
+  // === 浮動數字鍵盤 state ===
+  const [keypadPos, setKeypadPos] = useState({
+    x: 20,
+    y: 20
+  });
+  const [keypadScale, setKeypadScale] = useState(1.0);
+  const [keypadCollapsed, setKeypadCollapsed] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartRef = useRef({
+    pointerX: 0,
+    pointerY: 0,
+    posX: 0,
+    posY: 0
+  });
+  const isPrime = num => {
+    if (num < 2) return false;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return false;
+    }
+    return true;
+  };
+  const getPrimes = () => {
+    const primes = [];
+    for (let i = 2; i <= 100; i++) {
+      if (isPrime(i)) primes.push(i);
+    }
+    return primes;
+  };
+  const primes = getPrimes();
+  const getFirstDigit = num => String(num)[0];
+  const getLastDigit = num => String(num).slice(-1);
+  const canConnect = (prev, next) => {
+    if (!prev || !next) return false;
+    return getLastDigit(prev) === getFirstDigit(next);
+  };
+  const handleCellClick = index => {
+    if (grid[index] !== null) {
+      const clickedValue = grid[index];
+      const pathIndex = currentPath.indexOf(clickedValue);
+      if (pathIndex !== -1) {
+        const newGrid = [...grid];
+        const newPath = currentPath.slice(0, pathIndex + 1);
+        for (let i = pathIndex + 1; i < currentPath.length; i++) {
+          const cellIndex = grid.indexOf(currentPath[i]);
+          if (cellIndex !== -1) {
+            newGrid[cellIndex] = null;
+          }
+        }
+        setGrid(newGrid);
+        setCurrentPath(newPath);
+        setSelectedCell(index);
+        setInputValue('');
+        setGameOver(false);
+      }
+    } else {
+      setSelectedCell(index);
+      setInputValue('');
+    }
+  };
+  const handleKeyPress = (e, index) => {
+    if (grid[index] !== null || selectedCell !== index) return;
+    if (e.key === 'Enter') {
+      const value = parseInt(inputValue);
+      if (!isNaN(value) && inputValue !== '') {
+        handlePrimeSelect(value);
+      }
+    } else if (e.key >= '0' && e.key <= '9') {
+      e.preventDefault();
+      setInputValue(inputValue + e.key);
+    } else if (e.key === 'Backspace') {
+      e.preventDefault();
+      setInputValue(inputValue.slice(0, -1));
+    }
+  };
+  const handlePrimeSelect = prime => {
+    if (selectedCell === null || grid[selectedCell] !== null) return;
+    setErrorMessage('');
+    if (!isPrime(prime)) {
+      setErrorMessage('輸入的數字不是質數喔');
+      setInputValue('');
+      return;
+    }
+    if (prime < 1 || prime > 100) {
+      setErrorMessage('請輸入1到100之間的質數！');
+      setInputValue('');
+      return;
+    }
+    if (grid.includes(prime)) {
+      setErrorMessage('質數重覆了喲喔');
+      setInputValue('');
+      return;
+    }
+    if (currentPath.length > 0) {
+      const lastPrime = currentPath[currentPath.length - 1];
+      if (!canConnect(lastPrime, prime)) {
+        setErrorMessage(`規則不符！需要開頭為 ${getLastDigit(lastPrime)} 的質數`);
+        setInputValue('');
+        return;
+      }
+    }
+    const newGrid = [...grid];
+    newGrid[selectedCell] = prime;
+    setGrid(newGrid);
+    setCurrentPath([...currentPath, prime]);
+    if (currentPath.length + 1 > bestScore) {
+      setBestScore(currentPath.length + 1);
+    }
+    setInputValue('');
+    const nextEmptyCell = newGrid.findIndex((cell, idx) => cell === null && idx > selectedCell);
+    if (nextEmptyCell !== -1) {
+      setSelectedCell(nextEmptyCell);
+    } else {
+      setSelectedCell(null);
+      setGameOver(true);
+      if (currentPath.length + 1 > 0) {
+        const newRecord = {
+          path: [...currentPath, prime],
+          length: currentPath.length + 1,
+          timestamp: new Date().toLocaleString('zh-TW')
+        };
+        setSuccessRecords([newRecord, ...successRecords]);
+      }
+    }
+  };
+  const resetGame = () => {
+    const newGrid = Array(16).fill(null);
+    newGrid[5] = '很棒，加油';
+    newGrid[9] = '很棒，加油';
+    setGrid(newGrid);
+    setCurrentPath([]);
+    setSelectedCell(0);
+    setInputValue('');
+    setGameOver(false);
+    setErrorMessage('');
+  };
+  const startNewRound = () => {
+    if (currentPath.length > 0) {
+      const newRecord = {
+        path: [...currentPath],
+        length: currentPath.length,
+        timestamp: new Date().toLocaleString('zh-TW')
+      };
+      setSuccessRecords([newRecord, ...successRecords]);
+    }
+    resetGame();
+  };
+  const endGame = () => {
+    if (currentPath.length > 0) {
+      const newRecord = {
+        path: [...currentPath],
+        length: currentPath.length,
+        timestamp: new Date().toLocaleString('zh-TW')
+      };
+      setSuccessRecords([newRecord, ...successRecords]);
+    }
+    setShowEndGame(true);
+  };
+  const getHint = () => {
+    setShowHint(true);
+    setTimeout(() => setShowHint(false), 3000);
+  };
+  useEffect(() => {
+    if (selectedCell !== null) {
+      const cell = document.getElementById(`cell-${selectedCell}`);
+      if (cell) {
+        cell.focus();
+      }
+    }
+  }, [selectedCell]);
+
+  // === 浮動鍵盤：初始位置（畫面右下） ===
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const initX = Math.max(20, window.innerWidth - 280);
+      const initY = Math.max(20, window.innerHeight - 420);
+      setKeypadPos({
+        x: initX,
+        y: initY
+      });
+    }
+  }, []);
+
+  // === 浮動鍵盤：拖曳處理（同時支援滑鼠與觸控） ===
+  const handleDragStart = e => {
+    const isTouch = e.type === 'touchstart';
+    const point = isTouch ? e.touches[0] : e;
+    dragStartRef.current = {
+      pointerX: point.clientX,
+      pointerY: point.clientY,
+      posX: keypadPos.x,
+      posY: keypadPos.y
+    };
+    setIsDragging(true);
+  };
+  useEffect(() => {
+    if (!isDragging) return;
+    const handleMove = e => {
+      const isTouch = e.type === 'touchmove';
+      const point = isTouch ? e.touches[0] : e;
+      const dx = point.clientX - dragStartRef.current.pointerX;
+      const dy = point.clientY - dragStartRef.current.pointerY;
+      const newX = dragStartRef.current.posX + dx;
+      const newY = dragStartRef.current.posY + dy;
+      const maxX = (window.innerWidth || 1024) - 60;
+      const maxY = (window.innerHeight || 768) - 50;
+      setKeypadPos({
+        x: Math.min(Math.max(0, newX), maxX),
+        y: Math.min(Math.max(0, newY), maxY)
+      });
+      if (isTouch) e.preventDefault();
+    };
+    const handleEnd = () => setIsDragging(false);
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', handleEnd);
+    window.addEventListener('touchmove', handleMove, {
+      passive: false
+    });
+    window.addEventListener('touchend', handleEnd);
+    return () => {
+      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('mouseup', handleEnd);
+      window.removeEventListener('touchmove', handleMove);
+      window.removeEventListener('touchend', handleEnd);
+    };
+  }, [isDragging]);
+
+  // === 浮動鍵盤：按鍵處理 ===
+  const handleKeypadDigit = digit => {
+    if (selectedCell === null || grid[selectedCell] !== null) return;
+    setInputValue(prev => (prev + digit).slice(0, 3)); // 質數最多 3 位
+  };
+  const handleKeypadBackspace = () => {
+    if (selectedCell === null || grid[selectedCell] !== null) return;
+    setInputValue(prev => prev.slice(0, -1));
+  };
+  const handleKeypadClear = () => {
+    if (selectedCell === null || grid[selectedCell] !== null) return;
+    setInputValue('');
+  };
+  const handleKeypadEnter = () => {
+    if (selectedCell === null || grid[selectedCell] !== null) return;
+    const value = parseInt(inputValue);
+    if (!isNaN(value) && inputValue !== '') {
+      handlePrimeSelect(value);
+    }
+  };
+
+  // 縮放控制：70% 到 150%，每段 15%
+  const zoomIn = () => setKeypadScale(s => Math.min(1.5, +(s + 0.15).toFixed(2)));
+  const zoomOut = () => setKeypadScale(s => Math.max(0.7, +(s - 0.15).toFixed(2)));
+
+  // 渲染單個格子
+  const renderCell = (index, displayNumber) => {
+    const cellValue = grid[index];
+    const isLongText = typeof cellValue === 'string' && cellValue.length > 3;
+    const textSizeClass = isLongText ? 'text-[9px] sm:text-xs leading-tight' : 'text-base sm:text-3xl';
+    return /*#__PURE__*/React.createElement("div", {
+      className: "relative",
+      style: {
+        position: 'relative'
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      id: `cell-${index}`,
+      onClick: () => handleCellClick(index),
+      onKeyDown: e => handleKeyPress(e, index),
+      tabIndex: 0,
+      className: `w-12 h-12 sm:w-24 sm:h-24 rounded-lg border-2 sm:border-4 font-bold transition-all ${textSizeClass} ${cellValue !== null ? 'bg-blue-500 text-white border-blue-600' : selectedCell === index ? 'bg-yellow-100 border-yellow-500 border-dashed' : 'bg-gray-50 border-gray-300 hover:border-gray-400'}`,
+      style: {
+        position: 'relative',
+        overflow: 'visible'
+      }
+    }, cellValue !== null ? cellValue : selectedCell === index ? inputValue : ''), /*#__PURE__*/React.createElement("span", {
+      className: "absolute -top-1 -left-1 sm:-top-2 sm:-left-2 bg-red-500 text-white rounded-full w-5 h-5 sm:w-7 sm:h-7 flex items-center justify-center text-[11px] sm:text-sm font-bold",
+      style: {
+        zIndex: 10
+      }
+    }, displayNumber));
+  };
+
+  // 阻止按鈕搶走 focus（保留實體鍵盤可用性）
+  const preventFocusSteal = e => e.preventDefault();
+
+  // 鍵盤上的單一按鈕
+  const KeyButton = ({
+    onClick,
+    children,
+    variant = 'default'
+  }) => {
+    const variantClass = {
+      default: 'bg-gray-50 hover:bg-blue-100 active:bg-blue-200 text-gray-700 border border-gray-200',
+      backspace: 'bg-orange-50 hover:bg-orange-100 active:bg-orange-200 text-orange-600 border border-orange-200',
+      clear: 'bg-red-50 hover:bg-red-100 active:bg-red-200 text-red-600 border border-red-200',
+      enter: 'bg-green-500 hover:bg-green-600 active:bg-green-700 text-white shadow'
+    }[variant];
+    return /*#__PURE__*/React.createElement("button", {
+      onMouseDown: preventFocusSteal,
+      onClick: onClick,
+      className: `w-14 h-14 rounded-lg text-2xl font-bold transition ${variantClass}`
+    }, children);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-2 sm:p-4 flex items-center justify-center"
+  }, showWelcome && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4",
+    style: {
+      zIndex: 100
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-2xl sm:text-3xl font-bold text-blue-600 mb-4 sm:mb-6 text-center"
+  }, "\uD83C\uDFAE \u8CEA\u6578\u63A5\u9F8D\u904A\u6232"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3 sm:space-y-4 text-gray-700 text-sm sm:text-base"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-lg sm:text-xl font-bold text-purple-600"
+  }, "\u904A\u6232\u898F\u5247"), /*#__PURE__*/React.createElement("ul", {
+    className: "space-y-2 sm:space-y-3 list-disc list-inside"
+  }, /*#__PURE__*/React.createElement("li", null, "\u5F9E1\u5230100\u7684\u8CEA\u6578\u4E2D\u9078\u64C7\uFF0C\u586B\u51654\xD74\u7684\u683C\u5B50"), /*#__PURE__*/React.createElement("li", null, "\u4E0B\u4E00\u500B\u8CEA\u6578\u7684", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-blue-600"
+  }, "\u7B2C\u4E00\u500B\u6578\u5B57"), "\u8981\u548C\u524D\u4E00\u500B\u8CEA\u6578\u7684", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, "\u6700\u5F8C\u4E00\u500B\u6578\u5B57"), "\u76F8\u540C"), /*#__PURE__*/React.createElement("li", null, "\u4F8B\u5982\uFF1A2 \u2192 23 \u2192 37 \u2192 79\uFF082\u7684\u672B\u5C3E\u662F2\uFF0C23\u7684\u958B\u982D\u662F2\uFF09"), /*#__PURE__*/React.createElement("li", null, "\u6BCF\u500B\u8CEA\u6578\u53EA\u80FD\u4F7F\u7528\u4E00\u6B21")), /*#__PURE__*/React.createElement("h3", {
+    className: "text-lg sm:text-xl font-bold text-purple-600 mt-4 sm:mt-6"
+  }, "\u64CD\u4F5C\u8AAA\u660E"), /*#__PURE__*/React.createElement("ul", {
+    className: "space-y-2 sm:space-y-3 list-disc list-inside"
+  }, /*#__PURE__*/React.createElement("li", null, "\u9EDE\u64CA\u7A7A\u683C\u5B50\u9078\u4E2D"), /*#__PURE__*/React.createElement("li", null, "\u4F7F\u7528\u5BE6\u9AD4\u9375\u76E4\u76F4\u63A5\u8F38\u5165\uFF0C\u6216\u4F7F\u7528\u756B\u9762\u4E0A\u7684", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-blue-600"
+  }, "\u6D6E\u52D5\u6578\u5B57\u9375\u76E4")), /*#__PURE__*/React.createElement("li", null, "\u6309 Enter \u6216\u9375\u76E4\u4E0A\u7684 \u21B5 \u78BA\u8A8D"), /*#__PURE__*/React.createElement("li", null, "\u6D6E\u52D5\u9375\u76E4\u53EF", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, "\u62D6\u66F3\u79FB\u52D5"), "\u3001", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, "\u7E2E\u653E\u5927\u5C0F"), "\u3001", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, "\u6536\u5408\u5C55\u958B")), /*#__PURE__*/React.createElement("li", null, "\u7576\u627E\u4E0D\u5230\u4E0B\u4E00\u500B\u8CEA\u6578\u6642\uFF0C\u82E5\u60F3\u518D\u6311\u6230\u4E00\u6B21\uFF0C\u8ACB\u6309", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-green-600"
+  }, "\u300C\u518D\u6311\u6230\u4E00\u6B21\u300D"), "\uFF0C\u6703\u958B\u555F\u4E00\u500B\u65B0\u7684\u904A\u6232\u756B\u9762"), /*#__PURE__*/React.createElement("li", null, "\u82E5\u60F3\u7D50\u675F\u904A\u6232\uFF0C\u8ACB\u6309", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-orange-600"
+  }, "\u300C\u7D50\u675F\u904A\u6232\u300D"), "\uFF0C\u6309\u4E0B\u5F8C\uFF0C\u5247\u6703\u8DF3\u51FA\u4E00\u500B\u8996\u7A97\uFF0C\u986F\u793A\u6240\u6709\u6210\u529F\u7D00\u9304"))), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowWelcome(false),
+    className: "mt-6 sm:mt-8 w-full py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-lg sm:text-xl font-bold rounded-lg hover:from-blue-600 hover:to-purple-600 transition shadow-lg"
+  }, "\u958B\u59CB\u904A\u6232 \uD83D\uDE80"))), showRules && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4",
+    style: {
+      zIndex: 100
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-3xl font-bold text-blue-600 mb-6 text-center"
+  }, "\uD83D\uDCD6 \u904A\u6232\u8AAA\u660E"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-4 text-gray-700"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold text-purple-600"
+  }, "\u904A\u6232\u898F\u5247"), /*#__PURE__*/React.createElement("ul", {
+    className: "space-y-3 list-disc list-inside"
+  }, /*#__PURE__*/React.createElement("li", null, "\u5F9E1\u5230100\u7684\u8CEA\u6578\u4E2D\u9078\u64C7\uFF0C\u586B\u51654\xD74\u7684\u683C\u5B50"), /*#__PURE__*/React.createElement("li", null, "\u4E0B\u4E00\u500B\u8CEA\u6578\u7684", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-blue-600"
+  }, "\u7B2C\u4E00\u500B\u6578\u5B57"), "\u8981\u548C\u524D\u4E00\u500B\u8CEA\u6578\u7684", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, "\u6700\u5F8C\u4E00\u500B\u6578\u5B57"), "\u76F8\u540C"), /*#__PURE__*/React.createElement("li", null, "\u4F8B\u5982\uFF1A2 \u2192 23 \u2192 37 \u2192 79\uFF082\u7684\u672B\u5C3E\u662F2\uFF0C23\u7684\u958B\u982D\u662F2\uFF09"), /*#__PURE__*/React.createElement("li", null, "\u6BCF\u500B\u8CEA\u6578\u53EA\u80FD\u4F7F\u7528\u4E00\u6B21")), /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold text-purple-600 mt-6"
+  }, "\u64CD\u4F5C\u8AAA\u660E"), /*#__PURE__*/React.createElement("ul", {
+    className: "space-y-3 list-disc list-inside"
+  }, /*#__PURE__*/React.createElement("li", null, "\u9EDE\u64CA\u7A7A\u683C\u5B50\u9078\u4E2D"), /*#__PURE__*/React.createElement("li", null, "\u4F7F\u7528\u5BE6\u9AD4\u9375\u76E4\u76F4\u63A5\u8F38\u5165\uFF0C\u6216\u4F7F\u7528\u756B\u9762\u4E0A\u7684", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-blue-600"
+  }, "\u6D6E\u52D5\u6578\u5B57\u9375\u76E4")), /*#__PURE__*/React.createElement("li", null, "\u6309 Enter \u6216\u9375\u76E4\u4E0A\u7684 \u21B5 \u78BA\u8A8D"), /*#__PURE__*/React.createElement("li", null, "\u6D6E\u52D5\u9375\u76E4\u53EF", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, "\u62D6\u66F3\u79FB\u52D5"), "\u3001", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, "\u7E2E\u653E\u5927\u5C0F"), "\u3001", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, "\u6536\u5408\u5C55\u958B")), /*#__PURE__*/React.createElement("li", null, "\u7576\u627E\u4E0D\u5230\u4E0B\u4E00\u500B\u8CEA\u6578\u6642\uFF0C\u82E5\u60F3\u518D\u6311\u6230\u4E00\u6B21\uFF0C\u8ACB\u6309", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-green-600"
+  }, "\u300C\u518D\u6311\u6230\u4E00\u6B21\u300D"), "\uFF0C\u6703\u958B\u555F\u4E00\u500B\u65B0\u7684\u904A\u6232\u756B\u9762"), /*#__PURE__*/React.createElement("li", null, "\u82E5\u60F3\u7D50\u675F\u904A\u6232\uFF0C\u8ACB\u6309", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-orange-600"
+  }, "\u300C\u7D50\u675F\u904A\u6232\u300D"), "\uFF0C\u6309\u4E0B\u5F8C\uFF0C\u5247\u6703\u8DF3\u51FA\u4E00\u500B\u8996\u7A97\uFF0C\u986F\u793A\u6240\u6709\u6210\u529F\u7D00\u9304"))), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowRules(false),
+    className: "mt-8 w-full py-3 bg-blue-500 text-white text-lg font-bold rounded-lg hover:bg-blue-600 transition"
+  }, "\u95DC\u9589"))), showEndGame && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4",
+    style: {
+      zIndex: 100
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-8"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-3xl font-bold text-blue-600 mb-6 text-center"
+  }, "\uD83C\uDF89 \u904A\u6232\u7D50\u675F"), bestScore > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "mb-6 p-5 bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300 rounded-xl text-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-sm text-gray-600 mb-1"
+  }, "\u672C\u5834\u6700\u4F73\u6210\u7E3E"), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-center gap-3"
+  }, /*#__PURE__*/React.createElement(Trophy, {
+    className: "w-7 h-7 text-yellow-600"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-4xl font-bold text-blue-600"
+  }, bestScore), /*#__PURE__*/React.createElement("span", {
+    className: "text-lg text-gray-600"
+  }, "\u500B\u8CEA\u6578"))), /*#__PURE__*/React.createElement("div", {
+    className: "mb-6"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold text-gray-700 mb-4"
+  }, "\uD83C\uDFC6 \u6210\u529F\u7D00\u9304\uFF08\u5171 ", successRecords.length, " \u6B21\u6311\u6230\uFF09"), successRecords.length > 0 ? /*#__PURE__*/React.createElement("div", {
+    className: "space-y-3 max-h-60 overflow-y-auto"
+  }, successRecords.map((record, idx) => /*#__PURE__*/React.createElement("div", {
+    key: idx,
+    className: "p-4 bg-gradient-to-r from-green-50 to-blue-50 border border-green-300 rounded-lg"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center mb-2"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-green-700"
+  }, "\u7B2C ", successRecords.length - idx, " \u6B21\u6311\u6230"), /*#__PURE__*/React.createElement("span", {
+    className: "text-xl font-bold text-blue-600"
+  }, record.length, " \u500B\u8CEA\u6578")), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs text-gray-500 mb-2"
+  }, record.timestamp), /*#__PURE__*/React.createElement("div", {
+    className: "text-sm text-gray-700 break-all"
+  }, record.path.join(' → '))))) : /*#__PURE__*/React.createElement("div", {
+    className: "text-center text-gray-500 py-8"
+  }, "\u5C1A\u7121\u7D00\u9304")), /*#__PURE__*/React.createElement("div", {
+    className: "bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6 mb-6"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold text-purple-600 mb-4"
+  }, "\uD83D\uDCA1 \u601D\u8003\u63D0\u554F"), /*#__PURE__*/React.createElement("p", {
+    className: "font-semibold mb-3 text-gray-700"
+  }, "Q1\uFF1A\u4F60\u89BA\u5F97\u5F9E2\u30013\u30015\u90193\u500B\u8CEA\u6578\u958B\u59CB\u9032\u884C\u8CEA\u6578\u63A5\u9F8D\uFF0C\u54EA\u500B\u8CEA\u6578\u958B\u59CB\u7684\u8CEA\u6578\u93C8\u6703\u6BD4\u8F03\u77ED\uFF1F"), /*#__PURE__*/React.createElement("p", {
+    className: "font-semibold text-gray-700"
+  }, "Q2\uFF1A\u4F60\u6709\u6C92\u6709\u767C\u73FE\u89E3\u6C7A\u6B64\u554F\u984C\u7684\u95DC\u9375\u9EDE\uFF1F")), /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-4"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setShowEndGame(false);
+      resetGame();
+    },
+    className: "flex-1 py-3 bg-green-500 text-white text-lg font-bold rounded-lg hover:bg-green-600 transition"
+  }, "\u518D\u73A9\u4E00\u6B21"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowEndGame(false),
+    className: "flex-1 py-3 bg-gray-500 text-white text-lg font-bold rounded-lg hover:bg-gray-600 transition"
+  }, "\u95DC\u9589")))), /*#__PURE__*/React.createElement("div", {
+    className: "w-full max-w-7xl mx-auto"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-center mb-3 sm:mb-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-center gap-2 sm:gap-4"
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "text-2xl sm:text-4xl font-bold text-blue-600"
+  }, "\u8CEA\u6578\u63A5\u9F8D\u904A\u6232"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowRules(true),
+    className: "w-8 h-8 sm:w-10 sm:h-10 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition flex items-center justify-center text-lg sm:text-xl font-bold",
+    title: "\u904A\u6232\u8AAA\u660E"
+  }, "?")), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs sm:text-base text-gray-600"
+  }, "\u57284\xD74\u683C\u5B50\u4E2D\u586B\u5165\u8CEA\u6578\uFF0C\u8B93\u982D\u5C3E\u6578\u5B57\u76F8\u9023\uFF01")), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-1 xl:grid-cols-3 gap-3 sm:gap-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "xl:col-span-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-lg shadow-lg p-2 sm:p-4 mb-3 sm:mb-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap justify-between items-center gap-2"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-3 sm:gap-6"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs sm:text-sm text-gray-600"
+  }, "\u7576\u524D\u8DEF\u5F91"), /*#__PURE__*/React.createElement("div", {
+    className: "text-xl sm:text-3xl font-bold text-blue-600"
+  }, currentPath.length)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs sm:text-sm text-gray-600"
+  }, "\u6700\u4F73\u7D00\u9304"), /*#__PURE__*/React.createElement("div", {
+    className: "text-xl sm:text-3xl font-bold text-green-600 flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement(Trophy, {
+    className: "w-4 h-4 sm:w-6 sm:h-6"
+  }), bestScore))), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap gap-1 sm:gap-2"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: getHint,
+    className: "px-2 py-1 sm:px-4 sm:py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition flex items-center gap-1 text-xs sm:text-base"
+  }, /*#__PURE__*/React.createElement(Lightbulb, {
+    className: "w-3 h-3 sm:w-5 sm:h-5"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "hidden sm:inline"
+  }, "\u63D0\u793A")), /*#__PURE__*/React.createElement("button", {
+    onClick: startNewRound,
+    className: "px-2 py-1 sm:px-4 sm:py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center gap-1 text-xs sm:text-base"
+  }, /*#__PURE__*/React.createElement(RotateCcw, {
+    className: "w-3 h-3 sm:w-5 sm:h-5"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "hidden sm:inline"
+  }, "\u518D\u6311\u6230")), /*#__PURE__*/React.createElement("button", {
+    onClick: endGame,
+    className: "px-2 py-1 sm:px-3 sm:py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition text-xs sm:text-base"
+  }, "\u7D50\u675F"), /*#__PURE__*/React.createElement("button", {
+    onClick: resetGame,
+    className: "px-2 py-1 sm:px-4 sm:py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition flex items-center gap-1 text-xs sm:text-base"
+  }, /*#__PURE__*/React.createElement(RotateCcw, {
+    className: "w-3 h-3 sm:w-5 sm:h-5"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "hidden sm:inline"
+  }, "\u91CD\u7F6E"))))), /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-lg shadow-lg p-6"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-center mb-2"
+  }, [0, 1, 2, 3].map((index, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+    key: index
+  }, renderCell(index, index + 1), i < 3 && /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl text-gray-400",
+    style: {
+      width: '32px',
+      textAlign: 'center'
+    }
+  }, "\u2192")))), /*#__PURE__*/React.createElement("div", {
+    className: "flex mb-2",
+    style: {
+      paddingLeft: 'calc(50% + 160px)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl text-gray-400"
+  }, "\u2193")), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-center mb-2"
+  }, [7, 6, 5, 4].map((index, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+    key: index
+  }, renderCell(index, index + 1), i < 3 && /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl text-gray-400",
+    style: {
+      width: '32px',
+      textAlign: 'center'
+    }
+  }, "\u2190")))), /*#__PURE__*/React.createElement("div", {
+    className: "flex mb-2",
+    style: {
+      paddingLeft: 'calc(50% - 186px)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl text-gray-400"
+  }, "\u2193")), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-center mb-2"
+  }, [8, 9, 10, 11].map((index, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+    key: index
+  }, renderCell(index, index + 1), i < 3 && /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl text-gray-400",
+    style: {
+      width: '32px',
+      textAlign: 'center'
+    }
+  }, "\u2192")))), /*#__PURE__*/React.createElement("div", {
+    className: "flex mb-2",
+    style: {
+      paddingLeft: 'calc(50% + 160px)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl text-gray-400"
+  }, "\u2193")), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-center mb-4"
+  }, [15, 14, 13, 12].map((index, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+    key: index
+  }, renderCell(index, index + 1), i < 3 && /*#__PURE__*/React.createElement("div", {
+    className: "text-3xl text-gray-400",
+    style: {
+      width: '32px',
+      textAlign: 'center'
+    }
+  }, "\u2190")))), gameOver && /*#__PURE__*/React.createElement("div", {
+    className: "mt-6 p-4 bg-green-100 border-2 border-green-500 rounded-lg text-center"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xl font-bold text-green-700"
+  }, "\u904A\u6232\u7D50\u675F\uFF01"), /*#__PURE__*/React.createElement("div", {
+    className: "text-lg text-green-600"
+  }, "\u4F60\u5B8C\u6210\u4E86 ", currentPath.length, " \u500B\u8CEA\u6578\u7684\u93C8")))), /*#__PURE__*/React.createElement("div", {
+    className: "xl:col-span-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-3 sm:gap-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-lg shadow-lg p-3 sm:p-4 max-h-[400px] overflow-y-auto"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-700"
+  }, "\u904A\u6232\u63D0\u793A"), errorMessage && /*#__PURE__*/React.createElement("div", {
+    className: "mb-3 sm:mb-4 p-2 sm:p-3 bg-red-50 border-2 border-red-400 rounded-lg"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-red-700 font-semibold text-center text-xs sm:text-base"
+  }, "\u26A0\uFE0F ", errorMessage)), showHint && currentPath.length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "mb-3 sm:mb-4 p-2 sm:p-3 bg-blue-50 border border-blue-300 rounded"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs sm:text-sm font-semibold text-blue-700 mb-2"
+  }, "\uD83D\uDCA1 \u63D0\u793A\uFF1A"), /*#__PURE__*/React.createElement("div", {
+    className: "text-base sm:text-lg text-blue-600"
+  }, "\u958B\u982D\u662F ", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-xl sm:text-2xl"
+  }, getLastDigit(currentPath[currentPath.length - 1])), " \u7684\u8CEA\u6578\u6709\u54EA\u4E9B\uFF1F")), currentPath.length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "mb-3 sm:mb-4 p-2 sm:p-3 bg-purple-50 rounded"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs sm:text-sm text-gray-600 mb-1"
+  }, "\u4E0A\u4E00\u500B\u8CEA\u6578\uFF1A"), /*#__PURE__*/React.createElement("div", {
+    className: "text-2xl sm:text-3xl font-bold text-purple-600"
+  }, currentPath[currentPath.length - 1]), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs sm:text-sm text-gray-600 mt-1"
+  }, "\u9700\u8981\u958B\u982D\u70BA ", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, getLastDigit(currentPath[currentPath.length - 1])), " \u7684\u8CEA\u6578")), /*#__PURE__*/React.createElement("div", {
+    className: "p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "text-xs sm:text-sm text-blue-700"
+  }, "\uD83D\uDCA1 ", /*#__PURE__*/React.createElement("strong", null, "\u64CD\u4F5C\u8AAA\u660E\uFF1A"), /*#__PURE__*/React.createElement("br", null), "1. \u9EDE\u64CA\u7A7A\u683C\u5B50\u9078\u4E2D", /*#__PURE__*/React.createElement("br", null), "2. \u4F7F\u7528\u5BE6\u9AD4\u9375\u76E4\u6216\u6D6E\u52D5\u9375\u76E4\u8F38\u5165", /*#__PURE__*/React.createElement("br", null), "3. \u6309 Enter \u6216 \u21B5 \u78BA\u8A8D"))), /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-lg shadow-lg p-3 sm:p-4 max-h-[400px] overflow-y-auto"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-gray-700"
+  }, "\uD83D\uDCA1 \u63D0\u9192"), /*#__PURE__*/React.createElement("ul", {
+    className: "space-y-1 sm:space-y-2 text-gray-600 text-xs sm:text-sm"
+  }, /*#__PURE__*/React.createElement("li", null, "\u2713 \u627E\u4E0D\u5230\u4E0B\u4E00\u500B\u8CEA\u6578\u6642\uFF0C\u6309", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-green-600"
+  }, "\u300C\u518D\u6311\u6230\u4E00\u6B21\u300D")), /*#__PURE__*/React.createElement("li", null, "\u2713 \u60F3\u7D50\u675F\u904A\u6232\u6642\uFF0C\u6309", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-orange-600"
+  }, "\u300C\u7D50\u675F\u904A\u6232\u300D")), /*#__PURE__*/React.createElement("li", null, "\u2713 \u9EDE\u64CA", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-blue-600"
+  }, "\u300C?\u300D"), "\u67E5\u770B\u8AAA\u660E"), /*#__PURE__*/React.createElement("li", null, "\u2713 \u6D6E\u52D5\u9375\u76E4\u53EF", /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-purple-600"
+  }, "\u62D6\u66F3/\u7E2E\u653E/\u6536\u5408")))), successRecords.length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "bg-white rounded-lg shadow-lg p-3 sm:p-4 sm:col-span-2 xl:col-span-1 max-h-[400px] overflow-y-auto"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-gray-700"
+  }, "\uD83C\uDFC6 \u6210\u529F\u7D00\u9304"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-2 sm:space-y-3"
+  }, successRecords.map((record, idx) => /*#__PURE__*/React.createElement("div", {
+    key: idx,
+    className: "p-2 sm:p-3 bg-gradient-to-r from-green-50 to-blue-50 border border-green-300 rounded-lg"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex justify-between items-center mb-1 sm:mb-2"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-green-700 text-xs sm:text-base"
+  }, "\u7B2C ", successRecords.length - idx, " \u6B21"), /*#__PURE__*/React.createElement("span", {
+    className: "text-base sm:text-lg font-bold text-blue-600"
+  }, record.length, " \u500B")), /*#__PURE__*/React.createElement("div", {
+    className: "text-[10px] sm:text-xs text-gray-500 mb-1 sm:mb-2"
+  }, record.timestamp), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs sm:text-sm text-gray-700 break-all"
+  }, record.path.join(' → '))))))))), !showWelcome && !showEndGame && !showRules && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'fixed',
+      left: `${keypadPos.x}px`,
+      top: `${keypadPos.y}px`,
+      transform: `scale(${keypadScale})`,
+      transformOrigin: 'top left',
+      zIndex: 90,
+      touchAction: 'none',
+      userSelect: 'none',
+      WebkitUserSelect: 'none'
+    },
+    className: "bg-white rounded-2xl shadow-2xl border-2 border-gray-300"
+  }, /*#__PURE__*/React.createElement("div", {
+    onMouseDown: handleDragStart,
+    onTouchStart: handleDragStart,
+    className: "bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-2 rounded-t-2xl cursor-move flex items-center justify-between gap-2 select-none",
+    style: {
+      touchAction: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 text-sm font-bold"
+  }, /*#__PURE__*/React.createElement(Move, {
+    className: "w-4 h-4"
+  }), /*#__PURE__*/React.createElement("span", null, "\u6578\u5B57\u9375\u76E4")), /*#__PURE__*/React.createElement("div", {
+    className: "flex gap-1"
+  }, /*#__PURE__*/React.createElement("button", {
+    onMouseDown: e => e.stopPropagation(),
+    onTouchStart: e => e.stopPropagation(),
+    onClick: zoomOut,
+    disabled: keypadScale <= 0.7,
+    className: "w-7 h-7 bg-white/20 hover:bg-white/30 disabled:opacity-30 rounded flex items-center justify-center",
+    title: "\u7E2E\u5C0F"
+  }, /*#__PURE__*/React.createElement(Minus, {
+    className: "w-3.5 h-3.5"
+  })), /*#__PURE__*/React.createElement("button", {
+    onMouseDown: e => e.stopPropagation(),
+    onTouchStart: e => e.stopPropagation(),
+    onClick: zoomIn,
+    disabled: keypadScale >= 1.5,
+    className: "w-7 h-7 bg-white/20 hover:bg-white/30 disabled:opacity-30 rounded flex items-center justify-center",
+    title: "\u653E\u5927"
+  }, /*#__PURE__*/React.createElement(Plus, {
+    className: "w-3.5 h-3.5"
+  })), /*#__PURE__*/React.createElement("button", {
+    onMouseDown: e => e.stopPropagation(),
+    onTouchStart: e => e.stopPropagation(),
+    onClick: () => setKeypadCollapsed(c => !c),
+    className: "w-7 h-7 bg-white/20 hover:bg-white/30 rounded flex items-center justify-center",
+    title: keypadCollapsed ? '展開' : '收合'
+  }, keypadCollapsed ? /*#__PURE__*/React.createElement(ChevronUp, {
+    className: "w-4 h-4"
+  }) : /*#__PURE__*/React.createElement(ChevronDown, {
+    className: "w-4 h-4"
+  })))), !keypadCollapsed && /*#__PURE__*/React.createElement("div", {
+    className: "p-3"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "mb-3 px-2 py-2 bg-gray-50 border border-gray-200 rounded-lg text-center min-h-[44px] flex items-center justify-center"
+  }, selectedCell === null ? /*#__PURE__*/React.createElement("span", {
+    className: "text-xs text-gray-400"
+  }, "\u8ACB\u5148\u9EDE\u64CA\u7A7A\u683C") : grid[selectedCell] !== null ? /*#__PURE__*/React.createElement("span", {
+    className: "text-xs text-gray-400"
+  }, "\u6B64\u683C\u5DF2\u586B\uFF0C\u8ACB\u9078\u5176\u4ED6\u683C") : /*#__PURE__*/React.createElement("span", {
+    className: "text-2xl font-bold text-blue-600 tracking-wider"
+  }, inputValue || /*#__PURE__*/React.createElement("span", {
+    className: "text-gray-300"
+  }, "_ _"))), /*#__PURE__*/React.createElement("div", {
+    className: "grid grid-cols-3 gap-2"
+  }, /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('7')
+  }, "7"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('8')
+  }, "8"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('9')
+  }, "9"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('4')
+  }, "4"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('5')
+  }, "5"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('6')
+  }, "6"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('1')
+  }, "1"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('2')
+  }, "2"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('3')
+  }, "3"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: handleKeypadClear,
+    variant: "clear"
+  }, "C"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: () => handleKeypadDigit('0')
+  }, "0"), /*#__PURE__*/React.createElement(KeyButton, {
+    onClick: handleKeypadBackspace,
+    variant: "backspace"
+  }, "\u232B")), /*#__PURE__*/React.createElement("button", {
+    onMouseDown: preventFocusSteal,
+    onClick: handleKeypadEnter,
+    className: "mt-2 w-full h-12 rounded-lg text-lg font-bold bg-green-500 hover:bg-green-600 active:bg-green-700 text-white shadow transition"
+  }, "\u21B5 \u78BA\u8A8D Enter"), /*#__PURE__*/React.createElement("div", {
+    className: "mt-2 text-center text-[10px] text-gray-400"
+  }, "\u7E2E\u653E\uFF1A", Math.round(keypadScale * 100), "%\u3000\xB7\u3000\u53EF\u62D6\u66F3\u6A19\u984C\u5217\u79FB\u52D5"))));
+};
+// ============ 渲染掛載 ============
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(/*#__PURE__*/React.createElement(PrimeChainGame, null));
+// 移除載入畫面
+const loadingEl = document.getElementById('loading');
+if (loadingEl) loadingEl.style.display = 'none';
+  </script>
+</body>
+</html>
